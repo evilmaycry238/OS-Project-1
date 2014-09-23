@@ -1,12 +1,19 @@
 package OS.project1;
 
+import java.io.File;
+
 public class BatchProcessor 
 {
 
 	public static void main(String[] args) 
 	{
 		BatchParser myBatchParser = new BatchParser();
+		Batch batch = new Batch();
 		
+		//Again, change this to your own folder
+		File f = new File("C:/Users/ToBeAFreeWind/Desktop/Study/OS/batchProject/work/batch1.xml");
+		batch = myBatchParser.BuildBatch(f);
 	}
 
 }
+
