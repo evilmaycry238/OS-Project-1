@@ -1,0 +1,9 @@
+package OS.project1;
+
+import java.util.Map;
+
+public class BatchParser 
+{
+	String workingDir;
+	Map<String, Command> commands;
+}
