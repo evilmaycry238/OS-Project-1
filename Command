@@ -1,0 +1,6 @@
+package OS.project1;
+
+public interface Command 
+{
+
+}
