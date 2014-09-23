@@ -23,6 +23,7 @@ public class XmlParsing
 	public static void main(String[] args)
 	{
 		try {
+			//Change this Directory of your batch files. For eg: C:/batch1.xml
 			File f = new File("work/batch1.dos.xml");
 			
 			FileInputStream fis = new FileInputStream(f);
