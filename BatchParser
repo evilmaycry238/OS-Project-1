@@ -1,9 +1,13 @@
 package OS.project1;
 
+import java.io.File;
 import java.util.Map;
 
 public class BatchParser 
 {
-	String workingDir;
-	Map<String, Command> commands;
+	private Batch BuildBatch(File batchFile)
+	{
+		Batch batch = new Batch();
+		return batch;
+	}
 }
