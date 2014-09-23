@@ -65,7 +65,7 @@ public class XmlParsing
 		else if ("cmd".equalsIgnoreCase(cmdName)) {
 			System.out.println("Parsing cmd");
 			//Command cmd = CmdCommand.parse(elem);
-			//parseCmd(elem); // Example of parsing a cmd element
+			parseCmd(elem); // Example of parsing a cmd element
 		}
 		else if ("pipe".equalsIgnoreCase(cmdName)) {
 			System.out.println("Parsing pipe");
