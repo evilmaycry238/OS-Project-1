@@ -1,0 +1,12 @@
+package OS.project1;
+
+public class BatchProcessor 
+{
+
+	public static void main(String[] args) 
+	{
+		BatchParser myBatchParser = new BatchParser();
+		
+	}
+
+}
