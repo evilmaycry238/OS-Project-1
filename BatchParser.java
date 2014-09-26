@@ -57,6 +57,9 @@ public class BatchParser
 			FileCommand fCmd = new FileCommand();
 			fCmd.parseFile(elem);
 			batch.fileCmds.add(fCmd);
+			//New mapping
+			String temp = fCmd.id;
+			batch.cmdMap.put(temp, batch.fileCmds.get(batch.fileCmds.size()-1));
 		}
 		else if ("cmd".equalsIgnoreCase(cmdName)) {
 			System.out.println("Parsing cmd");
