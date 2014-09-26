@@ -15,14 +15,7 @@ public class Batch
 	ArrayList<FileCommand> fileCmds; 
 	ArrayList<CmdCommand> cmdCmds;
 	PipeCommand pipeCmd;
-	/*
-	public Batch()
-	{
-		commands.put("file1", fileCmds.get(0));
-		commands.put("file2", fileCmds.get(1));
-		commands.put("file3", fileCmds.get(2));
-	}
-	*/
+
 	public Batch()
 	{
 		wdCmd = new WDCommand();
