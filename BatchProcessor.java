@@ -41,7 +41,8 @@ public class BatchProcessor
 		builder.redirectError(new File("error.txt"));
 		String fileOut = batch.cmdCmds.get(i).outID;
 		int outID = Character.getNumericValue(fileOut.charAt(4)) -1;
-		builder.redirectOutput(new File(batch.fileCmds.get(outID).path));
+		fileOut = "work/" + batch.fileCmds.get(outID).path;
+		builder.redirectOutput(new File(fileOut));
 		try
 		{
 		Process process = builder.start();
