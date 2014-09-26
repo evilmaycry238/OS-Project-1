@@ -8,16 +8,15 @@ import java.util.Map;
 public class Batch 
 {
 	String workingDir;
-	Map <String, Command> commands = new HashMap<String, Command>();
+	Map <String, FileCommand> cmdMap;
 	WDCommand wdCmd;
 	CmdCommand cmdCmd1, cmdCmd2;
-	FileCommand fileCmd1, fileCmd2, fileCmd3;
 	ArrayList<FileCommand> fileCmds; 
 	ArrayList<CmdCommand> cmdCmds;
 	PipeCommand pipeCmd;
-
 	public Batch()
 	{
+		cmdMap = new HashMap<String, FileCommand>();
 		wdCmd = new WDCommand();
 		cmdCmd1 = new CmdCommand();
 		cmdCmd2 = new CmdCommand();
@@ -25,4 +24,3 @@ public class Batch
 		cmdCmds = new ArrayList<CmdCommand>();
 	}
 }
-
