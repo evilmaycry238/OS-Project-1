@@ -70,7 +70,9 @@ public class BatchParser
 		}
 		else if ("pipe".equalsIgnoreCase(cmdName)) {
 			System.out.println("Parsing pipe");
-			//Command cmd = PipeCommand.parse(elem);
+			PipeCommand pCmd = new PipeCommand(elem);
+			batch.pipeCmd = pCmd;
+
 		}
 		else {
 			throw new ProcessException("Unknown command " + cmdName + " from: " + elem.getBaseURI());
