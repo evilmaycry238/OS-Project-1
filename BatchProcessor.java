@@ -27,17 +27,74 @@ public class BatchProcessor
 		}
 	}
 	
-	static void executePipeBatch(Batch batch) 
+	static void executePipeBatch(Batch batch) throws ProcessException
 	{
-		for (int i = 0; i < batch.pipeCmd.pipeCmds.size(); i++)
+		List<String> command1 = new ArrayList<String>();
+		command1.add(batch.pipeCmd.pipeCmds.get(0).path);
+		for(String argi: batch.pipeCmd.pipeCmds.get(0).cmdArgs) 
 		{
-			List<String> command = new ArrayList<String>();
-			command.add(batch.pipeCmd.pipeCmds.get(i).path);
-			for(String argi: batch.pipeCmd.pipeCmds.get(i).cmdArgs) 
-			{
-				command.add(argi);
-			}
+			command1.add(argi);
 		}
+		ProcessBuilder builder1 = new ProcessBuilder(command1);
+		builder1.directory(new File(batch.wdCmd.path));
+		File wd = builder1.directory();
+		
+		List<String> command2 = new ArrayList<String>();
+		command2.add(batch.pipeCmd.pipeCmds.get(1).path);
+		for(String argi: batch.pipeCmd.pipeCmds.get(1).cmdArgs) 
+		{
+			command2.add(argi);
+		}
+		ProcessBuilder builder2 = new ProcessBuilder(command1);
+		builder2.directory(new File(batch.wdCmd.path));
+		
+		try 
+		{
+			final Process process1 = builder1.start();
+			final Process process2 = builder2.start();
+			
+			//Set the input of process 1 as file input
+			String fileIn = batch.pipeCmd.pipeCmds.get(0).inID;
+			String input = batch.cmdMap.get(fileIn).path;
+			FileInputStream fis = new FileInputStream(new File(wd, input));
+			
+			//Set output of process 1 as the stream output
+			OutputStream os = process1.getOutputStream();
+			ByteArrayOutputStream out = new ByteArrayOutputStream();
+			out = (ByteArrayOutputStream) os;
+			
+			//Copy from os of p1 to is of p2
+			//while (int c = os.read() != -1)
+				
+			//Set input of process 2 as the stream input
+			InputStream is = process2.getInputStream();
+			/*
+			ByteArrayOutputStream out = new ByteArrayOutputStream();
+			out = (ByteArrayOutputStream) process1.getOutputStream();
+			ByteArrayInputStream in = new ByteArrayInputStream(out.toByteArray());
+			is = in;
+			*/
+
+			//Set output of process 2 as the file output
+			String fileOut = batch.pipeCmd.pipeCmds.get(1).outID;
+			fileOut = "work/" + batch.cmdMap.get(fileOut).path;
+			FileOutputStream fos = new FileOutputStream(fileOut);
+			
+			fis.close();
+			fos.close();
+			os.close();
+
+			is.close();
+		} 
+		catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+		
+		
 	}
 
 	static void executeBatch(Batch batch) throws ProcessException
