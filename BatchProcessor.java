@@ -24,7 +24,7 @@ public class BatchProcessor
 		File f = new File(batchName);
 
 		batch = myBatchParser.BuildBatch(f);
-		if (!(batch.pipeCmd.id == null || batch.pipeCmd.id.isEmpty()))
+		if (!(batch.pipeCmd == null || batch.pipeCmd.id.isEmpty()))
 		{
 			System.out.println("Pipe Batch");
 			executePipeBatch(batch);
