@@ -1,9 +1,16 @@
 package OS.project1;
 
+
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.lang.Process;
+
 
 public class BatchProcessor 
 {
@@ -12,8 +19,10 @@ public class BatchProcessor
 		Batch batch = new Batch();
 		BatchParser myBatchParser = new BatchParser();
 		
-		//Again, change this to your own folder
-		File f = new File("work/batch4.xml");
+		String batchName = args[0];
+		//File f = new File("work/batch4.xml");
+		File f = new File(batchName);
+
 		batch = myBatchParser.BuildBatch(f);
 		if (!(batch.pipeCmd.id == null || batch.pipeCmd.id.isEmpty()))
 		{
@@ -56,12 +65,21 @@ public class BatchProcessor
 			//Set the input of process 1 as file input
 			String fileIn = batch.pipeCmd.pipeCmds.get(0).inID;
 			String input = batch.cmdMap.get(fileIn).path;
+			System.out.println(input);
 			FileInputStream fis = new FileInputStream(new File(wd, input));
+			
 			
 			//Set output of process 1 as the stream output
 			OutputStream os = process1.getOutputStream();
-			ByteArrayOutputStream out = new ByteArrayOutputStream();
-			out = (ByteArrayOutputStream) os;
+			/*
+			int achar;
+			while ((achar = fis.read()) != -1) {
+				os.write(achar);
+				//System.out.println(achar);
+
+			}
+			os.close();
+			*/
 			
 			//Copy from os of p1 to is of p2
 			//while (int c = os.read() != -1)
@@ -89,8 +107,7 @@ public class BatchProcessor
 		catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		
+		} 
 		
 		
 		
@@ -122,7 +139,6 @@ public class BatchProcessor
 			if( batch.cmdMap.containsKey(fileIn))
 			{
 				input = "work/" + batch.cmdMap.get(fileIn).path;
-				System.out.println("this is test: " + input);
 				builder.redirectInput(new File(input));
 			}
 			else
@@ -151,9 +167,9 @@ public class BatchProcessor
 		//Start the process
 		try
 		{
-		Process process = builder.start();
-		System.out.println("Command " + i + " executed");
-		process.waitFor();
+			Process process = builder.start();
+			System.out.println("Command " + i + " executed");
+			process.waitFor();
 		}
 		catch (Exception e) 
 		{
